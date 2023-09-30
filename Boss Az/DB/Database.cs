@@ -17,5 +17,10 @@ namespace Boss_Az.DB
 
         public List<Vacancy?>? Vacancies = new List<Vacancy?>();
         public List<CV?>? CVs = new List<CV?>();
+
+        public void Start()
+        {
+
+        }
     }
 }
