@@ -1,0 +1,29 @@
+{
+  "$id": "1",
+  "$values": [
+    {
+      "$id": "2",
+      "Specialization": "asd",
+      "SchoolAttended": "sadf",
+      "UniversityAdmissionScore": 123,
+      "GitHubLink": "https://github.com/alihttp404/",
+      "LinkedInLink": "https://github.com/alihttp404/",
+      "Author": {
+        "$id": "3",
+        "CV": {
+          "$ref": "2"
+        },
+        "Notifications": null,
+        "ID": "00000000-0000-0000-0000-000000000000",
+        "Name": "Ali",
+        "Surname": "Mammadov",
+        "Email": "ali@gmail.com",
+        "Password": "1234",
+        "City": "Baku",
+        "PhoneNumber": "0773329231",
+        "Age": 19
+      },
+      "Category": "Accounting and Finance"
+    }
+  ]
+}

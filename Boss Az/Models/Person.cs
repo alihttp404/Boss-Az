@@ -104,5 +104,17 @@ namespace Boss_Az.Models
                 throw new Exception(ex.Message, ex);
             }
         }
+
+        public override string ToString()
+        {
+            return $"ID: {ID}\n" +
+                   $"Name: {Name}\n" +
+                   $"Surname: {Surname}\n" +
+                   $"Email: {Email}\n" +
+                   $"City: {City}\n" +
+                   $"Phone Number: {PhoneNumber}\n" +
+                   $"Age: {Age}";
+        }
+
     }
 }

@@ -8,7 +8,7 @@ namespace Boss_Az.Models
 {
     internal class Employee : Person
     {
-        public CV CV = new CV();
+        public CV CV { get; set; } = new CV();
 
         public Employee()
         {

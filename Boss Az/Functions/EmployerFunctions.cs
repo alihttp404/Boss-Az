@@ -1,4 +1,5 @@
 ﻿using Boss_Az.DB;
+using Boss_Az.MenuConfigs;
 using Boss_Az.Menus;
 using Boss_Az.Models;
 using System;
@@ -101,6 +102,39 @@ namespace Boss_Az.Functions
 
             db.Vacancies.Add(newVacancy);
             currEmployer.Vacancies.Add(newVacancy);
+            CustomJson.Save(db.Vacancies, "vacancies");
+        }
+
+        public static void SearchCandidates(Database db)
+        {
+            Console.Clear();
+
+            Menu SelectViewMode = new Menu(new List<string>
+            {
+                "View all candidates",
+                "Search by category",
+                "Search by candidate name and surname",
+                "Search by university score",
+                "Search by number of known languages",
+                "Search by experience",
+                "Exit"
+            });
+
+            while (true)
+            {
+                int opt = SelectViewMode.Start();
+
+                switch (opt)
+                {
+                    case 0:
+                        foreach (Employee emp in db.Employees)
+                            Console.WriteLine(emp);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

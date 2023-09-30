@@ -50,7 +50,7 @@ namespace Boss_Az.Models
 
         public List<LanguageProficiency> KnownLanguages = new List<LanguageProficiency>();
 
-        private bool hasDiplomaDistinction;
+        public bool HasDiplomaDistinction;
 
         private string gitHubLink;
         public string GitHubLink
@@ -97,7 +97,7 @@ namespace Boss_Az.Models
                 Skills = skills;
                 PreviousCompanies = previousCompanies;
                 KnownLanguages = knownLanguages;
-                this.hasDiplomaDistinction = hasDiplomaDistinction;
+                HasDiplomaDistinction = hasDiplomaDistinction;
                 GitHubLink = gitHubLink;
                 LinkedInLink = linkedInLink;
                 Author = author;

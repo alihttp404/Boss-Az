@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.IO;
+using System.Text.Json.Serialization;
 
 namespace Boss_Az.DB
 {
@@ -16,6 +17,7 @@ namespace Boss_Az.DB
         {
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.WriteIndented = true;
+            options.ReferenceHandler = ReferenceHandler.Preserve;
 
             string filePath = Path.Combine(Dir, file + ".json");
 

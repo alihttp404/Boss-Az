@@ -232,9 +232,10 @@ namespace Boss_Az.Functions
 
             catch (Exception ex) { throw new Exception(ex.Message, ex); }
 
+            currEmployee.CV.Author = currEmployee;
             db.CVs.Add(currEmployee.CV);
-
             CustomJson.Save(db.CVs, "cvs");
+            CustomJson.Save(db.Employees, "employees");
          }
 
         public static void Panel(Database db, Employee currEmployee)
