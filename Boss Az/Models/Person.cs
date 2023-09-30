@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using Boss_Az.Functions;
 
 namespace Boss_Az.Models
 {
@@ -20,7 +21,7 @@ namespace Boss_Az.Models
             set
             {
                 if (value.Length < 3)
-                    throw new ArgumentException("Name must be at least 3 characters long.");
+                    throw new Exception("Name must be at least 3 characters long.");
                 name = value;
             }
         }
@@ -32,7 +33,7 @@ namespace Boss_Az.Models
             set
             {
                 if (value.Length < 3)
-                    throw new ArgumentException("Surname must be at least 3 characters long.");
+                    throw new Exception("Surname must be at least 3 characters long.");
                 surname = value;
             }
         }
@@ -45,7 +46,7 @@ namespace Boss_Az.Models
             {
                 string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
                 if (!Regex.IsMatch(value, emailPattern))
-                    throw new ArgumentException("Invalid email address.");
+                    throw new Exception("Invalid email address.");
                 email = value;
             }
         }
@@ -61,9 +62,9 @@ namespace Boss_Az.Models
             get { return phoneNumber; }
             set
             {
-                string phoneNumberPattern = @"^(?:0|994)(?:12|51|50|55|70|77)[^\w]{0,2}[2-9][0-9]{2}[^\w]{0,2}[0-9]{2}[^\w]{0,2}[0-9]{2}[^\d]$";
+                string phoneNumberPattern = @"^(050|070|077|055|051)\d{7}$";
                 if (!Regex.IsMatch(value, phoneNumberPattern))
-                    throw new ArgumentException("Invalid phone number.");
+                    throw new Exception("Invalid phone number.");
                 phoneNumber = value;
             }
         }
@@ -75,7 +76,7 @@ namespace Boss_Az.Models
             set
             {
                 if (value < 18)
-                    throw new ArgumentException("Age must be at least 18.");
+                    throw new Exception("Age must be at least 18.");
                 age = value;
             }
         }
@@ -90,17 +91,17 @@ namespace Boss_Az.Models
             try
             {
                 ID = Guid.NewGuid();
-                this.name = name;
-                this.surname = surname;
-                this.email = email;
-                this.city = city;
-                this.phoneNumber = phoneNumber;
-                this.age = age;
+                Name = name;
+                Surname = surname;
+                Email = email;
+                City = city;
+                PhoneNumber = phoneNumber;
+                Age = age;
                 Password = password;
             }
             catch (Exception ex)
             {
-                throw new Exception("Error while creating a Person object.\n\n", ex);
+                throw new Exception(ex.Message, ex);
             }
         }
     }

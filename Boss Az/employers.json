@@ -1,0 +1,13 @@
+[
+  {
+    "Notifications": null,
+    "ID": "22027c78-f4a3-45cf-8a32-0ef95d05fb8c",
+    "Name": "Add",
+    "Surname": "Soyad",
+    "Email": "ex@gmail.com",
+    "Password": "1234",
+    "City": "Baku",
+    "PhoneNumber": "0773329231",
+    "Age": 19
+  }
+]

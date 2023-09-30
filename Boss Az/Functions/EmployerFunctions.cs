@@ -36,15 +36,18 @@ namespace Boss_Az.Functions
                 Console.Write("Enter your age: ");
                 int age = int.Parse(Console.ReadLine());
 
-                Employer employee = new Employer(name!, surname!, email!, city!, phoneNumber!, age, password!);
-                db.Employers!.Add(employee);
+                Employer employer = new Employer(name!, surname!, email!, city!, phoneNumber!, age, password!);
+                db.Employers!.Add(employer);
+                CustomJson.Save(db.Employers, "employers");
             }
 
-            catch (Exception ex) { throw new Exception("Exception while employee signing up", ex); }
+            catch (Exception ex) { throw new Exception(ex.Message, ex); }
         }
 
         public static Employer SignIn(Database db)
         {
+            db.Employers = CustomJson.Load<List<Employer>>("employers");
+
             Console.WriteLine("Enter email: "); string email = Console.ReadLine();
             Console.WriteLine("Enter password: "); string password = Console.ReadLine();
 
@@ -94,7 +97,7 @@ namespace Boss_Az.Functions
                 new DateTime(StartYear, StartMonth, StartDay),
                 new DateTime(EndYear, EndMonth, EndDay),
                 jobDescription,
-                category));
+                category);
 
             db.Vacancies.Add(newVacancy);
             currEmployer.Vacancies.Add(newVacancy);

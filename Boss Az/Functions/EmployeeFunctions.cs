@@ -33,7 +33,7 @@ namespace Boss_Az.Functions
                 Console.Write("Enter your city: ");
                 string? city = Console.ReadLine();
 
-                Console.Write("Enter your phone number: ");
+                Console.Write("Enter your phone number 0XXXXXXXXX: ");
                 string? phoneNumber = Console.ReadLine();
 
                 Console.Write("Enter your age: ");
@@ -41,17 +41,22 @@ namespace Boss_Az.Functions
 
                 Employee employee = new Employee(name!, surname!, email!, city!, phoneNumber!, age, password!);
                 db.Employees!.Add(employee);
+                CustomJson.Save(db.Employees, "employees");
             }
 
-            catch (Exception ex) { throw new Exception("Exception while employee signing up", ex); }
+            catch (Exception ex) { throw new Exception(ex.Message, ex); }
         }
 
         public static Employee SignIn(Database db) 
         {
+            db.Employees = CustomJson.Load<List<Employee>>("employees");
+
+            bool found;
+
             Console.WriteLine("Enter email: "); string email = Console.ReadLine();
             Console.WriteLine("Enter password: "); string password = Console.ReadLine();
 
-            foreach (Employee? emp in db.Employees!)
+            foreach (Employee? emp in db?.Employees!)
             {
                 if (emp?.Email == email && emp?.Password == password)
                 {
@@ -61,7 +66,6 @@ namespace Boss_Az.Functions
 
             try { throw new Exception("Invalid email or password"); }
             catch (Exception ex) { throw new Exception(ex.Message, ex); }
-            finally { Utils.WaitForInput(); }
         }
 
         public static void ViewVacancies(Database db, Employee currEmployee)
@@ -165,7 +169,7 @@ namespace Boss_Az.Functions
             int HasDiplomaDistinctionOpt;
             while (true)
             {
-                HasDiplomaDistinctionOpt = YesNo.Start();
+                HasDiplomaDistinctionOpt = YesNo.Start("Do you have a diploma of distinction\n");
                 if (HasDiplomaDistinctionOpt == 0) { hasDiplomaDistinction = true; break; }
                 else { hasDiplomaDistinction = false; break; }
             }
@@ -176,7 +180,7 @@ namespace Boss_Az.Functions
                 int prevCompanyStartYear, prevCompanyStartMonth, prevCompanyStartDay;
                 int prevCompanyEndYear, prevCompanyEndMonth, prevCompanyEndDay;
 
-                int EnterNewCompanyOpt = YesNo.Start("Enter new company?");
+                int EnterNewCompanyOpt = YesNo.Start("Enter new company experience\n?");
                 if (EnterNewCompanyOpt == 0) 
                 {
                     Console.Write("Enter company name: "); prevCompanyname = Console.ReadLine();
@@ -229,6 +233,31 @@ namespace Boss_Az.Functions
             catch (Exception ex) { throw new Exception(ex.Message, ex); }
 
             db.CVs.Add(currEmployee.CV);
+
+            CustomJson.Save(db.CVs, "cvs");
          }
+
+        public static void Panel(Database db, Employee currEmployee)
+        {
+            while (true)
+            {
+                int opt = ProgramMenus.EmployeePanel.Start();
+
+                switch (opt)
+                {
+                    case 0:
+                        ViewVacancies(db, currEmployee);
+                        break;
+
+                    case 1:
+                        AddCV(db, currEmployee);
+                        break;
+
+                    default:
+                        break;
+                }
+                if (opt == 2) break;
+            }
+        }
     }
 }

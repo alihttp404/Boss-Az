@@ -20,7 +20,7 @@ namespace Boss_Az.Models
             set
             {
                 if (value.Length < 1)
-                    throw new ArgumentException("Job Title must have at least 1 character.");
+                    throw new Exception("Job Title must have at least 1 character.");
                 jobTitle = value;
             }
         }
@@ -32,7 +32,7 @@ namespace Boss_Az.Models
             set
             {
                 if (value.Length < 1)
-                    throw new ArgumentException("Company Name must have at least 1 character.");
+                    throw new Exception("Company Name must have at least 1 character.");
                 companyName = value;
             }
         }
@@ -44,7 +44,7 @@ namespace Boss_Az.Models
             set
             {
                 if (value > EndDate)
-                    throw new ArgumentException("Start Date cannot be later than End Date.");
+                    throw new Exception("Start Date cannot be later than End Date.");
                 startDate = value;
             }
         }
@@ -56,7 +56,7 @@ namespace Boss_Az.Models
             set
             {
                 if (value < StartDate)
-                    throw new ArgumentException("End Date cannot be earlier than Start Date.");
+                    throw new Exception("End Date cannot be earlier than Start Date.");
                 endDate = value;
             }
         }
@@ -65,7 +65,7 @@ namespace Boss_Az.Models
         public string JobDescription
         {
             get { return jobDescription; }
-            set { if (value.Length > 1) jobDescription = value; else throw new ArgumentException("Job description cannot be empty."); }
+            set { if (value.Length > 1) jobDescription = value; else throw new Exception("Job description cannot be empty."); }
         }
 
         public List<Employee> Applications = new List<Employee>();

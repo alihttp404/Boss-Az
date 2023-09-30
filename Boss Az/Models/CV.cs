@@ -15,7 +15,7 @@ namespace Boss_Az.Models
             set
             {
                 if (value.Length < 2)
-                    throw new ArgumentException("Specialization minimum 2 characters.");
+                    throw new Exception("Specialization minimum 2 characters.");
                 specialization = value;
             }
         }
@@ -27,7 +27,7 @@ namespace Boss_Az.Models
             set
             {
                 if (value.Length < 2)
-                    throw new ArgumentException("School attended minimum 2 characters.");
+                    throw new Exception("School attended minimum 2 characters.");
                 schoolAttended = value;
             }
         }
@@ -39,7 +39,7 @@ namespace Boss_Az.Models
             set
             {
                 if (value < 0)
-                    throw new ArgumentException("University Admission Score cannot be negative.");
+                    throw new Exception("University Admission Score cannot be negative.");
                 universityAdmissionScore = value;
             }
         }
@@ -59,7 +59,7 @@ namespace Boss_Az.Models
             set
             {
                 if (!Uri.IsWellFormedUriString(value, UriKind.Absolute))
-                    throw new ArgumentException("Invalid GitHub Link.");
+                    throw new Exception("Invalid GitHub Link.");
                 gitHubLink = value;
             }
         }
@@ -71,12 +71,12 @@ namespace Boss_Az.Models
             set
             {
                 if (!Uri.IsWellFormedUriString(value, UriKind.Absolute))
-                    throw new ArgumentException("Invalid LinkedIn Link.");
+                    throw new Exception("Invalid LinkedIn Link.");
                 linkedInLink = value;
             }
         }
 
-        public Employee Author { get; set; } = new Employee();
+        public Employee Author { get; set; }
 
         public string Category { get; set; }
 
@@ -106,7 +106,7 @@ namespace Boss_Az.Models
 
             catch (Exception ex) 
             {
-                throw new Exception("Error while creating a CV object.\n\n", ex);
+                throw new Exception(ex.Message, ex);
             }
         }
     }
